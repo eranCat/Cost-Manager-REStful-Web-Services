@@ -8,9 +8,10 @@ const router = express.Router();
 router.get("/users/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        const user = await User.findOne({ id });
+        console.log(`Getting user ${id}`)
+        const user = await User.findOne({ id:id.toString() });
         if (!user) {
-            return res.status(404).json({ error: "User not found" });
+            return res.status(404).json({ error: `User ${id} not found` });
         }
 
         const totalCosts = await Cost.aggregate([
@@ -20,12 +21,24 @@ router.get("/users/:id", async (req, res) => {
 
         const total = totalCosts[0]?.total || 0;
 
-        res.json({
+        res.status(200).json({
             first_name: user.first_name,
             last_name: user.last_name,
             id: user.id,
-            total,
+            total:total,
         });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get("/users/", async (req, res) => {
+    try {
+        console.log(`Getting all users`)
+        const users = await User.find({});
+        console.log("All Users:", users);
+
+        res.status(200).json(users);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
