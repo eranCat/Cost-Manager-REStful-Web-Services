@@ -38,4 +38,13 @@ router.get("/report", async (req, res) => {
     }
 });
 
+router.get("/reports", async (req, res) => {
+    try{
+        const costs = await Cost.find({});
+        res.json(costs);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+})
+
 module.exports = router;
