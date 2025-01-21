@@ -9,7 +9,7 @@ router.get("/users/:id", async (req, res) => {
     try {
         const { id } = req.params;
         console.log(`Getting user ${id}`)
-        const user = await User.findOne({ id:id.toString() });
+        const user = await User.findOne({ id });
         if (!user) {
             return res.status(404).json({ error: `User ${id} not found` });
         }
