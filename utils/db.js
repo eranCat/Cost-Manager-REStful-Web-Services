@@ -1,12 +1,17 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+
+mongoose.set('debug', true);
 
 const connectDB = async () => {
-    const MONGO_URI = "mongodb+srv://username:password@cluster.mongodb.net/mydatabase?retryWrites=true&w=majority";
+
+    const PASSWORD = 'e6kovBuO6X9xbwLN';
+    const MONGO_URI = `mongodb+srv://eranka12:${PASSWORD}@mazemeshane.unux6.mongodb.net/?retryWrites=true&w=majority&appName=MaZeMeshane`;
+
     try {
-        await mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-        console.log("MongoDB Connected...");
+        const res = await mongoose.connect(MONGO_URI);
+        console.log('MongoDB Connected...');
     } catch (error) {
-        console.error("MongoDB connection failed:", error.message);
+        console.error('MongoDB connection failed:', error.message);
         process.exit(1);
     }
 };
