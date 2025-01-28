@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
     id: { type: String, required: true, unique: true },
@@ -8,4 +8,4 @@ const userSchema = new mongoose.Schema({
     marital_status: { type: String, required: true },
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);

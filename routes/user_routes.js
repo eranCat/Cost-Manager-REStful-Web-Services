@@ -1,11 +1,11 @@
-const express = require("express");
-const User = require("../models/user_model");
-const Cost = require("../models/cost_model");
+const express = require('express');
+const User = require('../models/user_model');
+const Cost = require('../models/cost_model');
 
 const router = express.Router();
 
 // Get User Details
-router.get("/users/:id", async (req, res) => {
+router.get('/users/:id', async (req, res) => {
     try {
         const { id } = req.params;
         console.log(`Getting user ${id}`)
@@ -16,7 +16,7 @@ router.get("/users/:id", async (req, res) => {
 
         const totalCosts = await Cost.aggregate([
             { $match: { userid: id } },
-            { $group: { _id: null, total: { $sum: "$sum" } } },
+            { $group: { _id: null, total: { $sum: '$sum' } } },
         ]);
 
         const total = totalCosts[0]?.total || 0;
@@ -32,11 +32,11 @@ router.get("/users/:id", async (req, res) => {
     }
 });
 
-router.get("/users/", async (req, res) => {
+router.get('/users/', async (req, res) => {
     try {
         console.log(`Getting all users`)
         const users = await User.find({});
-        console.log("All Users:", users);
+        console.log('All Users:', users);
 
         res.status(200).json(users);
     } catch (error) {
@@ -45,7 +45,7 @@ router.get("/users/", async (req, res) => {
 });
 
 // About Team
-router.get("/about", (req, res) => {
+router.get('/about', (req, res) => {
     res.json([
         { first_name: 'Eran', last_name: 'Karaso' },
         { first_name: 'Maor', last_name: 'Michaeli' },
