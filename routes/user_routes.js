@@ -47,8 +47,9 @@ router.get("/users/", async (req, res) => {
 // About Team
 router.get("/about", (req, res) => {
     res.json([
-        { first_name: "Eran", last_name: "Karaso" },
-    //     TODO add yourself
+        { first_name: 'Eran', last_name: 'Karaso' },
+        { first_name: 'Maor', last_name: 'Michaeli' },
+        { first_name: 'Netanel', last_name: 'Musaev' },
     ]);
 });
 
