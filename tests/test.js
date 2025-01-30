@@ -21,7 +21,7 @@ describe('RESTful Web Services Tests', () => {
         const response = await request(app).get('/api/report?id=123123&year=2025&month=1');
 
         expect(response.statusCode).toBe(200);
-        expect(response.body).toHaveProperty('Food');
+        expect(response.body).toHaveProperty('food');
     });
 
     test('Get User Details', async () => {
