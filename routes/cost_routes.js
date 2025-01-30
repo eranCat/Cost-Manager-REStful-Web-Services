@@ -52,16 +52,29 @@ router.get('/report', async (req, res) => {
                 $group: {
                     _id: '$category',
                     total: {$sum: '$sum'},
-                    items: {$push: {description: '$description', sum: '$sum'}},
+                    items: {
+                        $push: {
+                            description: '$description',
+                            sum: '$sum',
+                            created_at: '$created_at'
+                        }
+                    },
                 },
             },
         ]);
 
         const response = {
-            id:id,year:year,month:month,
-            costs:{},
+            id: id, year: year, month: month,
+            costs: {},
         };
         costs.forEach((cost) => {
+            cost.items.forEach(
+                (costItem) => {
+                    costItem["day"] = new Date(costItem["created_at"]).getDay();
+                    delete costItem["created_at"];
+                }
+            )
+
             response["costs"][cost._id] = {
                 total: cost.total,
                 items: cost.items,
