@@ -57,9 +57,12 @@ router.get('/report', async (req, res) => {
             },
         ]);
 
-        const response = {};
+        const response = {
+            id:id,year:year,month:month,
+            costs:{},
+        };
         costs.forEach((cost) => {
-            response[cost._id] = {
+            response["costs"][cost._id] = {
                 total: cost.total,
                 items: cost.items,
             };
