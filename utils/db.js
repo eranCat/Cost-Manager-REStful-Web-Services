@@ -1,14 +1,13 @@
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+dotenv.config();
 
 mongoose.set('debug', true);
 
 const connectDB = async () => {
 
-    const PASSWORD = 'e6kovBuO6X9xbwLN';
-    const MONGO_URI = `mongodb+srv://eranka12:${PASSWORD}@mazemeshane.unux6.mongodb.net/?retryWrites=true&w=majority&appName=MaZeMeshane`;
-
     try {
-        const res = await mongoose.connect(MONGO_URI);
+        await mongoose.connect(process.env.MONGO_URI);
         console.log('MongoDB Connected...');
     } catch (error) {
         console.error('MongoDB connection failed:', error.message);

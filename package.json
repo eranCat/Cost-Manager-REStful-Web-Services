@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "debug": "~2.6.9",
+    "dotenv": "^16.4.7",
     "express": "5.0.0",
     "mongoose": "^8.9.4",
     "supertest": "^7.0.0"
