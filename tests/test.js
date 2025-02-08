@@ -18,10 +18,13 @@ describe('RESTful Web Services Tests', () => {
     });
 
     test('Get Monthly Report', async () => {
-        const response = await request(app).get('/api/report?id=123123&year=2025&month=1');
+        const month = new Date().getMonth() + 1;
+        const response = await request(app).get('/api/report?id=123123&year=2025&month='+ month);
 
         expect(response.statusCode).toBe(200);
-        expect(response.body).toHaveProperty('food');
+        const body = response.body;
+        expect(body).toHaveProperty('costs');
+        expect(body.costs).toHaveProperty('food');
     });
 
     test('Get User Details', async () => {
