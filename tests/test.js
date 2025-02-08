@@ -1,12 +1,22 @@
+/**
+ * @fileoverview Integration tests for the application
+ * @module test/test
+ */
 const mongoose = require('mongoose');
 const request = require('supertest');
 const app = require('../app');
 
+/**
+ * Close database connection after all tests
+ */
 afterAll(async () => {
     await mongoose.connection.close(); // Ensure DB connection is closed after tests
 });
 
 describe('RESTful Web Services Tests', () => {
+    /**
+     * Test adding a new cost item
+     */
     test('Add Cost Item', async () => {
         const response = await request(app)
             .post('/api/add')
@@ -17,6 +27,9 @@ describe('RESTful Web Services Tests', () => {
         expect(response.body).toHaveProperty('category', 'food');
     });
 
+    /**
+     * Test getting monthly report
+     */
     test('Get Monthly Report', async () => {
         const month = new Date().getMonth() + 1;
         const response = await request(app).get('/api/report?id=123123&year=2025&month='+ month);
@@ -27,6 +40,9 @@ describe('RESTful Web Services Tests', () => {
         expect(body.costs).toHaveProperty('food');
     });
 
+    /**
+     * Test getting user details
+     */
     test('Get User Details', async () => {
         const response = await request(app).get('/api/users/123123');
 
@@ -36,6 +52,9 @@ describe('RESTful Web Services Tests', () => {
         expect(response.body).toHaveProperty('total');
     });
 
+    /**
+     * Test getting about team information
+     */
     test('Get About Team', async () => {
         const response = await request(app).get('/api/about');
 

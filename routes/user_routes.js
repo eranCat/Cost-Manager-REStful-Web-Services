@@ -1,8 +1,17 @@
+/**
+ * @fileoverview Express router handling user-related endpoints
+ * @module routes/user_routes
+ */
 const express = require('express');
 const User = require('../models/user_model');
 const router = express.Router();
 
-// Get User Details
+/**
+ * Get user details by ID
+ * @route GET /api/users/:id
+ * @param {string} req.params.id - User ID
+ * @returns {Object} User details
+ */
 router.get('/users/:id', async (req, res) => {
     try {
         const { id } = req.params;
@@ -23,6 +32,11 @@ router.get('/users/:id', async (req, res) => {
     }
 });
 
+/**
+ * Get all users
+ * @route GET /api/users
+ * @returns {Array} List of all users
+ */
 router.get('/users/', async (req, res) => {
     try {
         console.log(`Getting all users`)
@@ -35,7 +49,11 @@ router.get('/users/', async (req, res) => {
     }
 });
 
-// About Team
+/**
+ * Get team information
+ * @route GET /api/about
+ * @returns {Array} List of team members
+ */
 router.get('/about', (req, res) => {
     res.json([
         { first_name: 'Eran', last_name: 'Karaso' },

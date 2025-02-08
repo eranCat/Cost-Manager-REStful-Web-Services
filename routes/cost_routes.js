@@ -1,10 +1,26 @@
+/**
+ * @fileoverview Express router handling cost-related endpoints
+ * @module routes/cost_routes
+ */
+
 const express = require('express');
 const Cost = require('../models/cost_model');
 const User = require('../models/user_model');
 
 const router = express.Router();
 
-// Add Cost
+
+/**
+ * Add a new cost entry
+ * @route POST /api/add
+ * @param {Object} req.body - Cost entry details
+ * @param {string} req.body.description - Description of the cost
+ * @param {string} req.body.category - Category of the cost
+ * @param {string} req.body.userid - User ID associated with the cost
+ * @param {number} req.body.sum - Amount of the cost
+ * @param {Date} [req.body.created_at] - Creation date of the cost entry
+ * @returns {Object} Created cost entry
+ */
 router.post('/add', async (req, res) => {
     try {
         const {description, category, userid, sum, created_at} = req.body;
@@ -23,7 +39,12 @@ router.post('/add', async (req, res) => {
     }
 });
 
-// Function to update total expenses for a user
+/**
+ * Updates the total expenses for a specific user
+ * @async
+ * @param {string} userId - The ID of the user to update
+ * @returns {Promise<void>}
+ */
 async function updateTotalExpenses(userId) {
     const total = await Cost.aggregate([
         {$match: {userid: userId}},
@@ -34,7 +55,15 @@ async function updateTotalExpenses(userId) {
     );
 }
 
-// Monthly Report
+/**
+ * Get monthly cost report for a user
+ * @route GET /api/report
+ * @param {Object} req.query
+ * @param {string} req.query.id - User ID
+ * @param {number} req.query.year - Year for the report
+ * @param {number} req.query.month - Month for the report (1-12)
+ * @returns {Object} Monthly cost report grouped by categories
+ */
 router.get('/report', async (req, res) => {
     try {
         const {id, year, month} = req.query;

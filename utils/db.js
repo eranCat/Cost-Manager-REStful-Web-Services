@@ -1,9 +1,20 @@
+/**
+ * @fileoverview Database connection configuration
+ * @module utils/db
+ */
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
 
 mongoose.set('debug', true);
 
+/**
+ * Establishes connection to MongoDB
+ * @async
+ * @function connectDB
+ * @throws {Error} If connection fails
+ * @returns {Promise<void>}
+ */
 const connectDB = async () => {
 
     try {

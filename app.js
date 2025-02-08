@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Main application entry point
+ * @module app
+ */
 const express = require("express");
 const connectDB = require("./utils/db");
 const costRoutes = require("./routes/cost_routes");
