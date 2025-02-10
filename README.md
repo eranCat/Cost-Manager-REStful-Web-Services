@@ -15,18 +15,3 @@ This project implements RESTful web services for managing costs. The backend is 
 ### API link: https://cost-manager-restful-web-services-ep4z.onrender.com/api
 using https://render.com/
 
-## Project Structure
-```plaintext
-.
-├── models
-│   ├── cost_model.js       # Mongoose schema for costs
-│   └── user_model.js       # Mongoose schema for users
-├── routes
-│   ├── cost_routes.js      # Routes for cost-related endpoints
-│   └── user_routes.js      # Routes for user-related endpoints
-├── utils
-│   └── db.js               # MongoDB connection utility
-├── app.js                  # Main server entry point
-├── package.json            # Project dependencies
-├── test.js                 # Unit tests for APIs
-```
