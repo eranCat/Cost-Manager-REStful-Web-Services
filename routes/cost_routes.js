@@ -73,7 +73,7 @@ router.get('/report', async (req, res) => {
         const costs = await Cost.aggregate([
             {
                 $match: {
-                    userid: id,
+                    userid: Number(id),
                     created_at: {$gte: startDate, $lt: endDate},
                 },
             },
